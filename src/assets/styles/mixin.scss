@@ -1,0 +1,12 @@
+@import './variables.scss';
+@mixin size($w,$h){
+    width: $w+px;
+    height: $h+px;
+}
+@mixin flex($align,$aling2,$horizontal:row,$warp: nowrap){
+    display: flex;
+    flex-direction: $horizontal;
+    flex-wrap: $warp;
+    justify-content: $align;
+    align-items: $aling2;
+}
