@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import {currentPath} from './../publicFn'
+import { noteBook } from '../store';
+const noteBookStore=noteBook()
 const route = useRoute()
-const pathName=route.path
+const data=currentPath(route.path)
+const title=()=>{
+    if(data!=='全部笔记'&& data!=='代办'){
+       return (noteBookStore.noteBookList.find(item=>item.randomId===data)?.text)   
+    }else{
+        return data
+    }
+}
 const props=defineProps({
    isShow:{
     type:Boolean,
@@ -10,8 +20,6 @@ const props=defineProps({
 })
 const emit = defineEmits(['getbol'])
 const goPopUps = () => {
-    console.log('nav');
-    
     emit('getbol', true)
 }
 </script>
@@ -21,7 +29,7 @@ const goPopUps = () => {
             <i v-if="route.path === '/'" class="icon-sousuo iconfont"></i><i class="iconfont icon-gengduo-shuxiang"></i>
         </div>
         <div class="title">
-            <span>{{ route.path == '/' ? '全部笔记' : '代办' }}</span><i v-if="route.path === '/'"
+            <span class="van-ellipsis">{{ title() }}</span><i
                class="iconfont" :class="isShow=== false ? 'icon-xiajiantou' : 'icon-shangjiantou'" @click="goPopUps"></i>
             <p>0项代办</p>
         </div>

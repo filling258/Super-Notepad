@@ -2,9 +2,13 @@
 import { ref, watch } from 'vue'
 import { noteBook, cover } from '../store';
 import { go } from '../publicFn';
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
 const coverStore = cover()
 const noteBookStore = noteBook()
 const show = ref(false)
+const currentIndex=noteBookStore.noteBookList.findIndex(item=>item.randomId===Number(route.params.id))
 const props = defineProps({
     isShow: {
         type: Boolean,
@@ -14,25 +18,23 @@ const props = defineProps({
 const updateShow = (newValisShow: boolean) => {
     show.value = newValisShow
 }
+const goNewNote = (index: number) => {
+    const id = noteBookStore.noteBookList[index].randomId
+    router.push({ path: `/NoteBook/${id}` })
+}
 const emit = defineEmits(['getbol'])
-const goPopUps = (newValshow:boolean) => {
-    show.value=newValshow
+const goPopUps = (newValshow: boolean) => {
+    show.value = newValshow
     emit('getbol', false)
 }
 watch([() => props.isShow, show], ([newValisShow, newValshow], [oldValisShow, oldValShow]) => {
     if (newValisShow !== oldValisShow) {
         updateShow(newValisShow)
-        console.log('324');
-
     }
-    if (newValshow !== oldValShow && newValshow===false) {
-        console.log('课件课件' + newValshow);
+    if (newValshow !== oldValShow && newValshow === false) {
         goPopUps(newValshow)
     }
 })
-setTimeout(() => {
-    console.log(show.value);
-}, 5000)
 const Private = () => {
     alert('此功能未上线')
 }
@@ -47,14 +49,15 @@ const Private = () => {
                     </div>
                     <p>新建笔记</p>
                 </div>
-                <div>
-                    <div @click="go('/10000001')"><img src="./../../assets/images/black_03.jpg" alt=""></div>
+                <div @click="go('/')">
+                    <div  :class="{ 'selectBoder': route.params.id === undefined }"><img src="./../assets/images/black_03.jpg" alt=""></div>
                     <p>全部笔记</p>
                     <em>0</em>
                 </div>
-                <div v-for="(item, index) in noteBookStore.noteBookList" :key="index" @click="go('/noteBook/111')">
-                    <div><img :src="coverStore.imgUrl[item.selectIndex].url" alt=""></div>
-                    <p>{{ item.text }}</p>
+                <div v-for="(item, index) in noteBookStore.noteBookList" :key="index" @click="goNewNote(index)">
+                    <div :class="{ 'selectBoder': index === currentIndex }"><img
+                            :src="coverStore.imgUrl[item.selectIndex].url" alt=""></div>
+                    <p class="van-ellipsis">{{ item.text }}</p>
                     <em>{{ item.num }}</em>
                 </div>
             </div>
@@ -79,15 +82,13 @@ const Private = () => {
         height: 2.2rem;
         margin-top: .15rem;
         margin-right: .16rem;
-
         &>div {
             width: 100%;
             height: 70%;
             box-sizing: border-box;
             padding: .04rem;
-            border: 3px solid #f9ba19;
             border-radius: .05rem .14rem .14rem .05rem;
-
+           
             &>div {
                 width: 100%;
                 height: 100%;
@@ -109,8 +110,11 @@ const Private = () => {
             }
 
         }
-
+        .selectBoder {
+                border: 3px solid #f9ba19;
+            }
         &>p {
+            width: 100%;
             line-height: .07rem;
 
         }
@@ -145,5 +149,4 @@ const Private = () => {
             margin-right: 2.3rem;
         }
     }
-}
-</style>
+}</style>

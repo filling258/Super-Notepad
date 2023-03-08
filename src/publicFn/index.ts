@@ -1,9 +1,17 @@
 import router from "../router"
-export const go=(name:string)=>{
-    console.log(name);
-    
-    router.push({path: name})
+export const go = (name: string) => {
+    router.push({ path: name })
+    return false
 }
-export const goBack=()=>{
+export const goBack = () => {
     router.back()
+}
+export const currentPath = (val: string) => {
+    if (val === "/") {
+        return '全部笔记'
+    } else if (val === '/Agent') {
+        return '代办'
+    } else {
+        return Number(val.substring(10))
+    }
 }

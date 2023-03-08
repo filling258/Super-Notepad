@@ -5,9 +5,7 @@ import NotePopUps from '../../components/NotePopUps.vue';
 import TabBar from '../../components/tabBar.vue';
 const isShow = ref(false)
 const changeMessage = (bol: boolean) => {
-    isShow.value = bol
-    console.log('主页');
-    
+    isShow.value = bol  
 }
 </script>
 <template>

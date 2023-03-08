@@ -17,6 +17,8 @@ const routes = [
         component: () => import("./../views/newlybuilt/newlyBuilt.vue")
     }
 ]
+
+
 const router = createRouter({
     // 使用hash的路由模式
     history: createWebHashHistory(),

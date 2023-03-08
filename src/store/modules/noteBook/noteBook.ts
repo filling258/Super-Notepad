@@ -11,11 +11,6 @@ export const noteBook=defineStore('noteBook',{
     state:(): noteBook=>{
         return {
             noteBookList:[
-                // {
-                //     imgId: 56,
-                //     text: 'jhkl',
-                //     num: 787
-                // }
             ]
         }
     },
