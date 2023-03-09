@@ -15,3 +15,11 @@ export const currentPath = (val: string) => {
         return Number(val.substring(10))
     }
 }
+export const getTime=()=>{
+    const Time=new Date()
+    const M=Time.getMonth()
+    const D=Time.getDate()
+    const h=Time.getHours()
+    const m=Time.getMinutes()
+    return {M,D,h,m}
+}

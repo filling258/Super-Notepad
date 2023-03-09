@@ -14,6 +14,7 @@ const props = defineProps({
         type: Boolean,
         default: false
     }
+
 })
 const updateShow = (newValisShow: boolean) => {
     show.value = newValisShow
@@ -43,7 +44,7 @@ const Private = () => {
     <div class="notebook">
         <van-action-sheet v-model:show="show" title="笔记本">
             <div class="content">
-                <div @click="go('/NewlyBuilt')">
+                <div @click="go('/NewNoteBook')">
                     <div>
                         <div><i class="icon-jiahao_o iconfont"></i></div>
                     </div>
@@ -57,14 +58,14 @@ const Private = () => {
                 <div v-for="(item, index) in noteBookStore.noteBookList" :key="index" @click="goNewNote(index)">
                     <div :class="{ 'selectBoder': index === currentIndex }"><img
                             :src="coverStore.imgUrl[item.selectIndex].url" alt=""></div>
-                    <p class="van-ellipsis">{{ item.text }}</p>
+                    <div class="van-ellipsis">{{ item.text }}</div>
                     <em>{{ item.num }}</em>
                 </div>
             </div>
             <div class="remove">
                 <div @click="Private"><i class="icon-simi iconfont"></i><span>私密笔记</span><i
                         class="icon-jinrujiantou iconfont"></i></div>
-                <div @click="go('/10000000')"><i class="icon-shanchu iconfont"></i><span>最近删除</span><i
+                <div @click="go('/NewNote')"><i class="icon-shanchu iconfont"></i><span>最近删除</span><i
                         class="icon-jinrujiantou iconfont"></i></div>
             </div>
         </van-action-sheet>

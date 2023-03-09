@@ -13,8 +13,11 @@ const routes = [
         path: '/Agent',
         component: () => import("./../views/agent/Agent.vue")
     }, {
-        path: '/NewlyBuilt',
-        component: () => import("./../views/newlybuilt/newlyBuilt.vue")
+        path: '/NewNoteBook',
+        component: () => import("../views/newlybuilt/newNoteBook.vue")
+    },{
+        path: '/NewNote',
+        component:()=> import("./../views/newlybuilt/newNote.vue")
     }
 ]
 

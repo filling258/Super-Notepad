@@ -3,6 +3,7 @@ import piniaPersist from 'pinia-plugin-persist'
 import {defineStore} from 'pinia'
 import { cover } from './modules/cover/cover'
 import { noteBook } from './modules/noteBook/noteBook'
+import { note } from './modules/noteBook/note'
 const pinia=createPinia()
 pinia.use(piniaPersist)
 
@@ -20,5 +21,5 @@ export const testStore=defineStore('test',{
         }
     }
 })
-export {cover,noteBook}
+export {cover,noteBook,note}
 export default pinia

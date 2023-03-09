@@ -29,7 +29,7 @@ const goPopUps = () => {
             <i v-if="route.path === '/'" class="icon-sousuo iconfont"></i><i class="iconfont icon-gengduo-shuxiang"></i>
         </div>
         <div class="title">
-            <span class="van-ellipsis">{{ title() }}</span><i
+            <div class="van-ellipsis">{{ title() }}</div><i
                class="iconfont" :class="isShow=== false ? 'icon-xiajiantou' : 'icon-shangjiantou'" @click="goPopUps"></i>
             <p>0项代办</p>
         </div>
@@ -53,12 +53,11 @@ const goPopUps = () => {
     }
 
     .title {
-        span {
+        div {
+            display: inline-block;
+            width: 90%;
             font-size: .39rem;
             font-weight: 300;
-            margin-right: .1rem;
-
         }
-
     }
 }</style>

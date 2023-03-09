@@ -1,10 +1,11 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
-import router from './../../router'
-import { cover ,noteBook } from './../../store'
+import router from '../../router'
+import { cover ,noteBook,note } from '../../store'
 import { goBack } from '../../publicFn';
 const coverStore = cover()
 const notebookStore=noteBook()
+const noteStore=note()
 const selectIndex = ref(0)
 const text = ref('')
 const selectCover = (i: number) => {
@@ -12,7 +13,8 @@ const selectCover = (i: number) => {
 }
 const goNewNote = (selectIndex: number,text: string,  num: number = 0) => {
     const randomId = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
-   notebookStore.addNoteBook({randomId, selectIndex,text,num})
+    notebookStore.addNoteBook({randomId, selectIndex,text,num})
+    noteStore.addContentId(randomId)
     router.push({ path: `/noteBook/${randomId}` })
 }
 </script>
