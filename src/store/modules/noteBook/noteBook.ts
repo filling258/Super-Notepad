@@ -17,6 +17,8 @@ export const noteBook=defineStore('noteBook',{
     actions: {
         addNoteBook(payld: {randomId:number,selectIndex:number,text: string,num:number}) {
             this.noteBookList.push(payld)
+            console.log(this.noteBookList);
+            
         }
       },
 })

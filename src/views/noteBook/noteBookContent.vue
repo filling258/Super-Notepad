@@ -5,12 +5,18 @@ import { go } from '../../publicFn';
 import router from '../../router';
 const route=useRoute()
 const noteStore=note()
-const id=Number(route.params.id)
-const contentList=noteStore.noteList.find(item=>item.contentId===id)
+const isHome=route.path==='/' ? true : false;
+const homeContentList=noteStore.noteList[0].data
+const contentList=isHome===true ? homeContentList : noteStore.noteList.find(item=>item.contentId===Number(route.params.id))?.data
 const goNewNote=()=>{
-    router.push({path: '/NewNote',query: { contentId: id}})
+    if(!isHome){
+        router.push({path: '/NewNote',query: { contentId: Number(route.params.id)}})
+    }else {
+        router.push({path: '/NewNote',query: {contentId: 10000000}})
+    }
+    
 }
-const btn=()=>{
+const btn=()=>{ 
     console.log(contentList);
     
 }
@@ -18,7 +24,7 @@ const btn=()=>{
 <template>
 <div class="content">
     <button @click="btn">dianji </button>
-    <div class="card" v-for="(item,index) in contentList?.data || null" :key="index">
+    <div class="card" v-for="(item,index) in contentList || null" :key="index">
       {{ item.title }}
       {{ item.content }}
     </div>
